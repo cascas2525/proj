@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Music Festival</title>
+  <style>
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #000;
+      color: #fff;
+      line-height: 1.6;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 10%;
+      z-index: 1000;
+    }
+    nav .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+    }
+    nav .menu {
+      display: flex;
+      gap: 20px;
+    }
+    nav .menu a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    nav .menu a:hover {
+      color: #ff5c8d;
+    }
+
+    
+    .kpop {
+      height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .kpop video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 0;
+    }
+
+    .kpop::after {
+      content: '';
+      position: absolute;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(0,0,0,0.6);
+    }
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      padding: 0 20px;
+    }
+    .content h1 {
+      font-size: 70px;
+      font-weight: 900;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #ff5c8d, #ff2e63, #ff8fb1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-size: 400% 400%;
+      animation: rgbFlow 6s ease infinite;
+    }
+    @keyframes rgbFlow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .content p {
+      font-size: 22px;
+      color: #fce4ec;
+    }
+    .btn-main {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 32px;
+      border-radius: 30px;
+      background: linear-gradient(45deg, #ff5c8d, #ff2e63);
+      color: #fff;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 600;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .btn-main:hover {
+      transform: scale(1.1);
+      box-shadow: 0 10px 30px rgba(255,46,99,0.6);
+    }
+
+    section {
+      padding: 80px 10%;
+      background: #111;
+    }
+    section h2 {
+      text-align: center;
+      font-size: 42px;
+      margin-bottom: 50px;
+      color: #ff8fb1;
+      text-shadow: 0 0 10px #ff5c8d;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+    .card {
+      background: #222;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+    }
+    .card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+    }
+    .card-content {
+      padding: 20px;
+      text-align: center;
+    }
+    .card-content h3 {
+      margin-bottom: 10px;
+      font-size: 22px;
+      color: #ff8fb1;
+    }
+    .card-content p, .card-content dl {
+      font-size: 16px;
+      color: #ddd;
+    }
+    .card-content dl {
+      margin-top: 10px;
+      text-align: left;
+      display: inline-block;
+    }
+    .card-content dt {
+      font-weight: bold;
+      color: #ff8fb1;
+      display: inline;
+    }
+    .card-content dd {
+      margin: 0 0 10px 5px;
+      display: inline;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 20px;
+      background: #ff2e63;
+      color: #fff;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: #ff5c8d;
+    }
+
+    .food-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 30px;
+      align-items: center;
+      justify-items: center;
+      list-style: none;
+    }
+    .food-grid img {
+      width: 200px;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      filter: brightness(0.95);
+      transition: transform 0.3s, filter 0.3s;
+    }
+    .food-grid img:hover {
+      transform: scale(1.1);
+      filter: brightness(1.2);
+    }
+    .food-grid h3 {
+  margin: 8px 0;
+  font-size: 1.4em;
+  color: #ff66cc;
+  text-shadow: 0 0 8px rgba(255, 102, 204, 0.8);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      background: #222;
+      color: #fff;
+    }
+    th, td {
+      border: 1px solid #444;
+      padding: 15px;
+    }
+    th {
+      background: #ff2e63;
+      color: #fff;
+    }
+
+
+    footer {
+      background: #000;
+      color: #ccc;
+      padding: 60px 10%;
+      text-align: center;
+    }
+    footer .links {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    footer .links a {
+      color: #ccc;
+      text-decoration: none;
+      font-size: 14px;
+    }
+    footer .links a:hover {
+      color: #fff;
+    }
+
+
+    @media(max-width: 768px) {
+      .content h1 {
+        font-size: 48px;
+      }
+      nav {
+        padding: 10px 5%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="#" class="logo">KPOP FESTIVAL</a>
+    <div class="menu">
+      <a href="#artists">Artists</a>
+      <a href="#foods">Foods</a>
+      <a href="#tickets">Tickets</a>
+    </div>
+  </nav>
+
+ 
+  <section class="kpop">
+    <video autoplay muted loop playsinline>
+      <source src="backvid.mp4" type="video/mp4">
+    </video>
+    <div class="content">
+      <h1>KPOP FESTIVAL</h1>
+      <p>Experience the best KPOP Groups Performances</p>
+      <a href="#tickets" class="btn-main">Buy Tickets</a>
+    </div>
+  </section>
+
+
+  <section id="artists">
+    <h2>Artists</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://preview.redd.it/digital-art-twice-home-9round-anniversary-wallpapers-4k-v0-nmfw9kzs1dzd1.png?width=1080&crop=smart&auto=webp&s=d720563dcfacab513baae1c68bfc0b566f749283" alt="Twice">
+        <div class="card-content">
+          <h3>Twice</h3>
+          <dl>
+            <dt>Genre:</dt> <dd>K-pop</dd><br>
+            <dt>Time:</dt> <dd>7:30 PM</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://external-preview.redd.it/g2DCUktiJTQ6xHkix26AmWOMzSonoiRQo0ei7ATxo-8.jpg?width=1080&crop=smart&auto=webp&s=3172d3648e04b5a8bc4309f7fed5617d328fa322" alt="Red Velvet">
+        <div class="card-content">
+          <h3>Red Velvet</h3>
+          <dl>
+            <dt>Genre:</dt> <dd>K-pop</dd><br>
+            <dt>Time:</dt> <dd>9:30 PM</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://kpopreviewed.com/wp-content/uploads/2024/05/itzy-borntobe-1.jpeg?w=1200&h=800&crop=1" alt="ITZY">
+        <div class="card-content">
+          <h3>ITZY</h3>
+          <dl>
+            <dt>Genre:</dt> <dd>K-pop</dd><br>
+            <dt>Time:</dt> <dd>10:30 PM</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://www.kedglobal.com/data/ked/image/2023/08/03/ked202308030004.700x.0.jpg" alt="NewJeans">
+        <div class="card-content">
+          <h3>NewJeans</h3>
+          <dl>
+            <dt>Genre:</dt> <dd>K-pop</dd><br>
+            <dt>Time:</dt> <dd>11:30 PM</dd>
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!--CREDITS TO THE OWNER-->
+  <section id="foods">
+    <h2>Food Stalls</h2>
+    <ul class="food-grid">
+      <li><img src="https://hips.hearstapps.com/hmg-prod/images/korean-corn-dogs-secondary-6871555727d8a.jpg?crop=1xw:1xh;center,top&resize=980:*" alt="Corn dog"><h3>Corn Dog</h3>
+      <p> • Mozzarella <br> • Potato <br> • Cheddar <br></p>
+      </li>
+      <li><img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj7o9paOO0De5MXyiZzMXyv7S9BB0KiFiU9tfU9iOJnCdjHwt06ZzovspCwjDemw_4j7APW0z3-hJ206dXLMEvUnHm5Vqz2LYUgIyoGmN7yjW-1cCdi9HS26vVJKthzajxKdr9Q90UQicU1/s1600/Gangnam_Amasvin2.JPG" alt="Bubble Tea">      <h3>Bubble Tea</h3>
+      <p>• Mango <br> • Taro <br> • Matcha <br> • Honeydew <br> • Strawberry <br> • Bluberry </p></li>
+      <li><img src="https://www.kedglobal.com/data/ked/image/2023/03/29/ked202303290012.700x.0.jpg" alt="Light Pastries"> <h3>Pastries</h3>
+      <p> • Croissants <br> • Cream Buns <br> • Egg Tarts</p></li>
+      <li><img src="https://sporked.com/wp-content/uploads/2025/04/RANKING-UPDATE_BULDAK-RAMEN-2025_HEADER-966x544.jpg" alt="Buldak"><h3>Buldak Noodles</h3>
+      <p> • Original <br> • Cheese <br> • Carbonara <br> • Rose</p></li>
+      <li><img src="https://cicili.tv/wp-content/uploads/2023/06/Flower-Kimbap-Small-2.jpg" alt="Kimbap"> <h3>Kimbap</h3>
+      <p> • Classic <br> • Tuna <br> • Cheese</p></li>
+    </ul>
+  </section>
+
+
+  <section id="tickets">
+    <h2>Tickets</h2>
+    <table>
+      <tr>
+        <th>Type</th>
+        <th>Price</th>
+        <th>Includes</th>
+        <th>Action</th>
+      </tr>
+      <tr>
+        <td>General</td>
+        <td>₩15,000</td>
+        <td>Entry Only</td>
+        <td><a href="#" class="btn">Buy</a></td>
+      </tr>
+      <tr>
+        <td>VIP</td>
+        <td>₩20,000</td>
+        <td>Front Row, Free Water</td>
+        <td><a href="#" class="btn">Buy</a></td>
+      </tr>
+      <tr>
+        <td>Backstage</td>
+        <td>₩35,000</td>
+        <td>Meet & Greet, Free Signature</td>
+        <td><a href="#" class="btn">Buy</a></td>
+      </tr>
+    </table>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 KPOP Festival. All Rights Reserved.</p>
+    <div class="links">
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a href="#">FAQ</a>
+      <a href="#">Privacy Policy</a>
+    </div>
+  </footer>
+
+</body>
+</html>
